@@ -18,7 +18,9 @@ class PayloadsWidget(QtWidgets.QWidget, payloads_ui.Ui_Form):
         self.pushButton.clicked.connect(self.save_payloads)
 
     def save_payloads(self):
-        PAYLOADS = self.plainTextEdit.getPaintContext()
+        global PAYLOADS
+        PAYLOADS = self.plainTextEdit.toPlainText()
+        self.close()
 
 
 class FuzzerWidget(QtWidgets.QWidget, fuzzer_ui.Ui_Form):
@@ -110,7 +112,7 @@ class Njaxt(QtWidgets.QMainWindow, njaxt_ui.Ui_MainWindow):
 
     def fuzz(self):
         loop = QEventLoop()
-        for request in self.fuzzer.requests():
+        for request in self.fuzzer.requests(PAYLOADS):
             self.webView.loadFinished.connect(loop.quit)
             self.webView.load(request)
             loop.exec()

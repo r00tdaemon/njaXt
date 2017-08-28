@@ -28,20 +28,19 @@ class Fuzzer:
     def __init__(self, req: dict):
         self.request = Request(req)
 
-    def requests(self, payloads):
-        with open("njaXt/payloads.dat") as file:
-            for payload in file.readlines():
-                url = self.request.url.replace("[X]", payload)
-                url = QUrl.fromUserInput(url)
-                req = QWebEngineHttpRequest(url)
-                req.setMethod(
-                    QWebEngineHttpRequest.Get if self.request.method == "GET"
-                    else QWebEngineHttpRequest.Post
-                )
-                for header in self.request.headers:
-                    req.setHeader(header[0].encode(), header[1].encode())
+    def requests(self, payloads: str):
+        for payload in payloads.splitlines():
+            url = self.request.url.replace("[X]", payload)
+            url = QUrl.fromUserInput(url)
+            req = QWebEngineHttpRequest(url)
+            req.setMethod(
+                QWebEngineHttpRequest.Get if self.request.method == "GET"
+                else QWebEngineHttpRequest.Post
+            )
+            for header in self.request.headers:
+                req.setHeader(header[0].encode(), header[1].encode())
 
-                if self.request.post_data:
-                    req.setPostData(self.request.post_data.encode())
+            if self.request.method == "POST" and self.request.post_data:
+                req.setPostData(self.request.post_data.encode())
 
-                yield req
+            yield req

