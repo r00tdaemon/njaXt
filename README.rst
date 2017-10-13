@@ -4,6 +4,7 @@ A GUI tool for finding XSS
 
 Installation
 ------------
+``$ pip3 install njaxt``
 
 Usage
 -----
