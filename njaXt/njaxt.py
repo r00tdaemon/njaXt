@@ -9,7 +9,6 @@ from njaXt import fuzzer
 from njaXt.payloads import PAYLOADS
 
 
-# https://xss-game.appspot.com/level1/frame?query=[X]
 class PayloadsWidget(QtWidgets.QWidget, payloads_ui.Ui_Form):
     def __init__(self, parent=None):
         super().__init__(parent)

@@ -1,18 +1,32 @@
 import os
-import runpy
+import re
 from codecs import open
 from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 
+
+def find_version(*file_paths):
+    try:
+        f = open(os.path.join(here, *file_paths), "r", "utf-8")
+        version_file = f.read()
+        f.close()
+    except:
+        raise RuntimeError("Unable to find version string.")
+
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
+                              version_file, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
+
 with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
-VERSION = runpy.run_path(os.path.join(here, "njaXt", "version.py"))["VERSION"]
 
 setup(
     name="njaXt",
-    version=VERSION,
+    version=find_version("njaXt/__init__.py"),
     description="It's not just another XSS tool",
     long_description=long_description,
     url="https://github.com/ujjwal96/njaXt",
@@ -23,9 +37,6 @@ setup(
         "njaXt.*"
     ]),
     include_package_data=True,
-    package_data={
-        'njaXt': ['payloads.dat']
-    },
     entry_points={
         "console_scripts": [
             "njaxt=njaXt.njaxt:main"
@@ -43,5 +54,5 @@ setup(
     install_requires=[
         "pyqt5>=5.9, <5.10"
     ],
-    python_requires='~=3.5'
+    python_requires='>=3.5'
 )

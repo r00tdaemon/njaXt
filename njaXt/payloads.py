@@ -180,4 +180,5 @@ $root.$$phase=null;od=$root.$digest;$root.$digest=({}).toString;C=c.$apply(c);$r
 {{constructor.constructor('alert(1)')()}}
 "/><svg/on<script>load=alert(document.domain);>"/>
 j&#x61;v&#x41;sc&#x52;ipt&#x3A;alert(1)
+†‡•＜img src=a onerror=javascript:alert('hacked')>…‰€
 """
