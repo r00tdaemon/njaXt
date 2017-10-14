@@ -112,17 +112,14 @@ class Njaxt(QtWidgets.QMainWindow, njaxt_ui.Ui_MainWindow):
         self.fuzz()
 
     def handle_reset(self):
-        """
-        Reset Fuzz Widget
-        """
+        # Reset Fuzz Widget
         self.fuzz_widget.reset_widget()
-        """
-        Reset Main Form
-        """
+        # Reset Main Form
         self.fuzzer = fuzzer.Fuzzer({"url": ""})
         self.init_webview()
         self.lineEdit.setText("")
         self.set_progress(0)
+        self.stopLoop = False
 
     def detect_xss(self, source):
         if "<br>alerting" in source:
