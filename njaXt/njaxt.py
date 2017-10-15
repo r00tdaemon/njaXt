@@ -36,6 +36,12 @@ class FuzzerWidget(QtWidgets.QWidget, fuzzer_ui.Ui_Form):
         self.data["post_data"] = self.plainTextEdit_2.toPlainText() if self.data["method"] == "POST" else None
         self.close()
 
+    def reset_widget(self):
+        self.lineEdit.setText("")
+        self.comboBox.setCurrentIndex(0)
+        self.plainTextEdit.setPlainText("")
+        self.plainTextEdit_2.setPlainText("")
+        self.data = {}
 
 class Njaxt(QtWidgets.QMainWindow, njaxt_ui.Ui_MainWindow):
     def __init__(self):
@@ -81,6 +87,7 @@ class Njaxt(QtWidgets.QMainWindow, njaxt_ui.Ui_MainWindow):
     def init_sigslot(self):
         self.lineEdit.returnPressed.connect(self.make_fuzzer)
         self.pushButton.clicked.connect(self.make_fuzzer)
+        self.pushButtonReset.clicked.connect(self.handle_reset)
 
         self.actionAdvanced_Fuzzer.triggered.connect(self.show_fuzz)
         self.fuzz_widget.pushButton.clicked.connect(self.make_fuzzer)
@@ -103,6 +110,16 @@ class Njaxt(QtWidgets.QMainWindow, njaxt_ui.Ui_MainWindow):
             self.fuzzer = fuzzer.Fuzzer({"url": self.lineEdit.text()})
 
         self.fuzz()
+
+    def handle_reset(self):
+        # Reset Fuzz Widget
+        self.fuzz_widget.reset_widget()
+        # Reset Main Form
+        self.fuzzer = fuzzer.Fuzzer({"url": ""})
+        self.init_webview()
+        self.lineEdit.setText("")
+        self.set_progress(0)
+        self.stopLoop = False
 
     def detect_xss(self, source):
         if "<br>alerting" in source:
