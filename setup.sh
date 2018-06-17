@@ -7,8 +7,7 @@ echo "Creating dev environment in ./venv..."
 python3 -m venv venv
 . venv/bin/activate
 pip3 install -U pip setuptools
-pip3 install -r requirements.txt
-
+pip3 install -e .
 echo ""
 echo "  * Created virtualenv environment in ./venv."
 echo "  * Installed all dependencies into the virtualenv."
